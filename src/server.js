@@ -18,6 +18,12 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.get('/', (req, res) => {
+    res.send('Hello, World!');
+});
+app.get('/api', (req, res) => {
+    res.send('Hello, API!');
+});
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/services', servicesRouter);
