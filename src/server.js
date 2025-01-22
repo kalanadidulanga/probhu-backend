@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 import servicesRouter from './routes/services.routes.js';
+import clientsRouter from './routes/clients.routes.js';
+
 import { errorHandler } from './middleware/error.middleware.js';
 
 dotenv.config();
@@ -19,6 +21,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/services', servicesRouter);
+app.use('/api/clients', clientsRouter);
 
 // Error handling
 app.use(errorHandler);
