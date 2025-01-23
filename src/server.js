@@ -7,6 +7,7 @@ import userRoutes from './routes/user.routes.js';
 import servicesRouter from './routes/services.routes.js';
 import clientsRouter from './routes/clients.routes.js';
 import reviewsRouter from './routes/reviews.routes.js';
+import appointmentsRouter from './routes/appointments.routes.js';
 
 import { errorHandler } from './middleware/error.middleware.js';
 
@@ -30,6 +31,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/services', servicesRouter);
 app.use('/api/clients', clientsRouter);
 app.use('/api/reviews', reviewsRouter);
+app.use('/api/appointments', appointmentsRouter);
 
 // Error handling
 app.use(errorHandler);
