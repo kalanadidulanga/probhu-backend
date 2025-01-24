@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post('/', createAppointment);
 router.post('/:id/mark-as-read', markAppointmentAsRead);
-router.get('/appointments', getAppointments);
+router.get('/', getAppointments);
 
 export default router;
