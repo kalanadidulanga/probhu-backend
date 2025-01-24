@@ -35,18 +35,18 @@ export const createAppointment = async (req, res) => {
 async function sendEmailToAdmin(appointment) {
     const transporter = nodemailer.createTransport({
         // Configure your email transporter here
-        host: 'smtp.example.com',
+        host: 'mail.prabhu.lk',
         port: 587,
         secure: false,
         auth: {
-            user: 'username',
-            pass: 'password',
+            user: 'noreply@prabhu.lk',
+            pass: 'saloonPrabhu@25',
         },
     });
 
     const mailOptions = {
-        from: 'no-reply@example.com',
-        to: 'admin@example.com',
+        from: 'noreply@prabhu.lk',
+        to: 'info@prabhu.lk',
         subject: 'New Appointment Booking',
         text: `
       A new appointment has been booked:
