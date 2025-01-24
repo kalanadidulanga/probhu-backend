@@ -4,7 +4,7 @@ import { markAppointmentAsRead, createAppointment, getAppointments } from '../co
 const router = express.Router();
 
 router.post('/', createAppointment);
-router.post('/:id/mark-as-read', markAppointmentAsRead);
+router.get('/:id/mark-as-read', markAppointmentAsRead);
 router.get('/', getAppointments);
 
 export default router;
