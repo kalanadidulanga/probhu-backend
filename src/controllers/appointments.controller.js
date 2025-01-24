@@ -17,7 +17,7 @@ export const createAppointment = async (req, res) => {
                 fullName,
                 phoneNumber,
                 email: email || null,
-                date,
+                date: new Date(date), // Convert date string to Date object
                 category,
                 location: location || null,
             },
@@ -73,6 +73,58 @@ export const markAppointmentAsRead = async (req, res) => {
         });
 
         return ApiResponse.success(res, appointment, 'Appointment marked as read');
+    } catch (error) {
+        return ApiResponse.error(res, error.message, 500);
+    }
+};
+
+// Get appointments with pagination
+export const getAppointments = async (req, res) => {
+    try {
+        // Extract pagination parameters from query, with defaults
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
+
+        // Optional filters
+        const filters = {
+            ...(req.query.status && { status: req.query.status }),
+            ...(req.query.category && { category: req.query.category }),
+        };
+
+        // Fetch total count for pagination metadata
+        const totalAppointments = await prisma.appointment.count({ where: filters });
+        const totalPages = Math.ceil(totalAppointments / limit);
+
+        // Fetch appointments with pagination
+        const appointments = await prisma.appointment.findMany({
+            where: filters,
+            skip: skip,
+            take: limit,
+            orderBy: {
+                createdAt: 'desc' // Optional: order by most recent first
+            },
+            select: {
+                id: true,
+                fullName: true,
+                phoneNumber: true,
+                email: true,
+                date: true,
+                category: true,
+                status: true,
+                createdAt: true
+            }
+        });
+
+        return ApiResponse.success(res, {
+            appointments,
+            pagination: {
+                currentPage: page,
+                totalPages,
+                totalAppointments,
+                pageSize: limit
+            }
+        }, 'Appointments retrieved successfully');
     } catch (error) {
         return ApiResponse.error(res, error.message, 500);
     }

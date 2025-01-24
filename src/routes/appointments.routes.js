@@ -1,9 +1,10 @@
 import express from "express";
-import { markAppointmentAsRead, createAppointment } from '../controllers/appointments.controller.js';
+import { markAppointmentAsRead, createAppointment, getAppointments } from '../controllers/appointments.controller.js';
 
 const router = express.Router();
 
 router.post('/', createAppointment);
 router.post('/:id/mark-as-read', markAppointmentAsRead);
+router.get('/appointments', getAppointments);
 
 export default router;
