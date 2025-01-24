@@ -25,7 +25,10 @@ export const createReview = async (req, res) => {
 
 export const getAllReviews = async (req, res) => {
     try {
+        const { status } = req.query;
+
         const reviews = await prisma.review.findMany({
+            where: status ? { status } : {},
             orderBy: { createdAt: 'desc' },
         });
 
