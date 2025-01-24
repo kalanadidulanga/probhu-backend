@@ -8,6 +8,7 @@ import servicesRouter from './routes/services.routes.js';
 import clientsRouter from './routes/clients.routes.js';
 import reviewsRouter from './routes/reviews.routes.js';
 import appointmentsRouter from './routes/appointments.routes.js';
+import contactRouter from './routes/contact.routes.js';
 
 import { errorHandler } from './middleware/error.middleware.js';
 
@@ -32,6 +33,7 @@ app.use('/api/services', servicesRouter);
 app.use('/api/clients', clientsRouter);
 app.use('/api/reviews', reviewsRouter);
 app.use('/api/appointments', appointmentsRouter);
+app.use('/api/contact', contactRouter);
 
 // Error handling
 app.use(errorHandler);
