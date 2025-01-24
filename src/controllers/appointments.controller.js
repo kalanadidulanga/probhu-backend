@@ -110,6 +110,7 @@ export const getAppointments = async (req, res) => {
                 phoneNumber: true,
                 email: true,
                 date: true,
+                location: true,
                 category: true,
                 status: true,
                 createdAt: true
