@@ -1,3 +1,4 @@
+//src/controllers/packages.controller.js
 import prisma from "../lib/prisma.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 

@@ -67,3 +67,13 @@ model Package {
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
 }
+
+model Package2 {
+    id        Int      @id @default(autoincrement())
+    imageUrl  String   @db.Text
+    title     String   @db.VarChar(255)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@map("package2")
+}

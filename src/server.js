@@ -10,6 +10,7 @@ import reviewsRouter from './routes/reviews.routes.js';
 import appointmentsRouter from './routes/appointments.routes.js';
 import contactRouter from './routes/contact.routes.js';
 import packagesRouter from './routes/packages.routes.js';
+import package2Router from './routes/package2.routes.js';
 
 import { errorHandler } from './middleware/error.middleware.js';
 
@@ -36,6 +37,7 @@ app.use('/api/reviews', reviewsRouter);
 app.use('/api/appointments', appointmentsRouter);
 app.use('/api/contact', contactRouter);
 app.use('/api/packages', packagesRouter);
+app.use('/api/package2', package2Router);
 
 // Error handling
 app.use(errorHandler);
