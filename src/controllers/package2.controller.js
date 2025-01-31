@@ -23,7 +23,8 @@ export const getAllPackage2s = async (req, res) => {
     try {
         const package2s = await prisma.package2.findMany({
             orderBy: {
-                createdAt: 'desc'
+                // createdAt: 'desc'
+                createdAt: 'asc'
             }
         });
         return ApiResponse.success(res, package2s, 'Packages retrieved');
