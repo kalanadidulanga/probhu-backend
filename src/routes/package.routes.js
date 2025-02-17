@@ -9,7 +9,7 @@ import {
   deleteCategory,
   deletePackage,
   deletePriceList,
-} from "../controllers/packageController";
+} from "../controllers/package.controller.js";
 const router = express.Router();
 // const packageController = require('../controllers/packageController');
 
