@@ -11,7 +11,7 @@ import appointmentsRouter from './routes/appointments.routes.js';
 import contactRouter from './routes/contact.routes.js';
 // import packagesRouter from './routes/packages.routes.js';
 import package2Router from './routes/package2.routes.js';
-import packageRoutes from './routes/packages.routes.js';
+import packageRoutes from './routes/packageRoutes.js';
 
 import { errorHandler } from './middleware/error.middleware.js';
 
