@@ -6,7 +6,9 @@ const prisma = new PrismaClient();
 export const getAllCategories = async (req, res) => {
     try {
         const categories = await prisma.category.findMany({
-            include: { packages: true }
+            include: { 
+                packages: { include: { services: true } }
+             },
         });
         ApiResponse.success(res, categories);
     } catch (error) {
