@@ -26,4 +26,4 @@ router.delete("/categories/:id", deleteCategory);
 router.delete("/packages/:id", deletePackage);
 router.delete("/pricelists/:id", deletePriceList);
 
-module.exports = router;
+export default router;
