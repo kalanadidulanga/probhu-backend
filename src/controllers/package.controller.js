@@ -14,9 +14,9 @@ export const getAllPackages = async (req, res) => {
 
 export const createPackage = async (req, res) => {
   try {
-    const { categoryId, name, description, priceMin, priceMax } = req.body;
+    const { categoryId, name, description } = req.body;
     const newPackage = await prisma.package.create({
-      data: { categoryId, name, description, priceMin, priceMax },
+      data: { categoryId, name, description : description || null },
     });
     ApiResponse.success(res, newPackage, "Package created successfully", 201);
   } catch (error) {
