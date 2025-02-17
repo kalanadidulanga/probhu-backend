@@ -42,9 +42,9 @@ app.use("/api/contact", contactRouter);
 // app.use('/api/packages', packagesRouter);
 // app.use('/api', packageRoutes);
 app.use("/api/package2", package2Router);
-app.use("/categories", categoryRoutes);
-app.use("/packages", packageRoutes);
-app.use("/service-items", serviceItemRoutes); // Updated route
+app.use("/api/categories", categoryRoutes);
+app.use("/api/packages", packageRoutes);
+app.use("/api/service-items", serviceItemRoutes); // Updated route
 
 // Error handling
 app.use(errorHandler);
