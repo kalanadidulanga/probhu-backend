@@ -58,14 +58,32 @@ model Appointment {
     updatedAt   DateTime @updatedAt
 }
 
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  packages  Package[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
 model Package {
-    id          Int      @id @default(autoincrement())
-    title       String   @db.VarChar(255)
-    price       Decimal  @db.Decimal(10, 2)
-    description String   @db.Text
-    imageUrl    String   @db.VarChar(255)
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+  id         Int       @id @default(autoincrement())
+  name       String
+  categoryId Int
+  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  priceLists PriceList[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model PriceList {
+  id        Int      @id @default(autoincrement())
+  title     String
+  price     Decimal  @db.Decimal(10,2)
+  packageId Int
+  package   Package  @relation(fields: [packageId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Package2 {
