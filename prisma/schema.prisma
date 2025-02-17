@@ -59,31 +59,34 @@ model Appointment {
 }
 
 model Category {
-  id        Int       @id @default(autoincrement())
-  name      String    @unique
-  packages  Package[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+    id        String    @id @default(uuid())
+    name      String    @unique
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    packages  Package[]
 }
 
 model Package {
-  id         Int       @id @default(autoincrement())
-  name       String
-  categoryId Int
-  category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  priceLists PriceList[]
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+    id           String        @id @default(uuid())
+    categoryId   String
+    name         String
+    description  String?
+    priceMin     Float
+    priceMax     Float
+    createdAt    DateTime      @default(now())
+    updatedAt    DateTime      @updatedAt
+    category     Category      @relation(fields: [categoryId], references: [id])
+    serviceItems ServiceItem[]
 }
 
-model PriceList {
-  id        Int      @id @default(autoincrement())
-  title     String
-  price     Decimal  @db.Decimal(10,2)
-  packageId Int
-  package   Package  @relation(fields: [packageId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model ServiceItem {
+    id        String   @id @default(uuid())
+    packageId String
+    name      String
+    price     Float
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    package   Package  @relation(fields: [packageId], references: [id])
 }
 
 model Package2 {
