@@ -27,6 +27,7 @@ export const createPackage = async (req, res) => {
 export const deletePackage = async (req, res) => {
   try {
     const { id } = req.params;
+    await prisma.serviceItem.deleteMany({ where: { packageId: id } });
     await prisma.package.delete({ where: { id: id } });
     return ApiResponse.success(res, null, "Package deleted", 204);
   } catch (error) {

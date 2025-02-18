@@ -31,6 +31,7 @@ export const createCategory = async (req, res) => {
 export const deleteCategory = async (req, res) => {
   try {
     const { id } = req.params;
+    await prisma.package.deleteMany({ where: { categoryId: id } });
     await prisma.category.delete({ where: { id: id } });
     ApiResponse.success(res, null, "Category deleted successfully", 204);
   } catch (error) {
