@@ -23,3 +23,7 @@ export const createPackage = async (req, res) => {
     ApiResponse.error(res, error.message, 400);
   }
 };
+
+export const deletePackage = async (req,res)=>{
+  
+}
