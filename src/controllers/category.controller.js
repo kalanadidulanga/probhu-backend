@@ -27,3 +27,27 @@ export const createCategory = async (req, res) => {
     ApiResponse.error(res, error.message, 400);
   }
 };
+
+export const deleteCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await prisma.category.delete({ where: { id: id } });
+    ApiResponse.success(res, null, "Category deleted successfully", 204);
+  } catch (error) {
+    ApiResponse.error(res, error.message, 500);
+  }
+};
+
+export const updateCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name } = req.body;
+    const category = await prisma.category.update({
+      where: { id: id },
+      data: { name },
+    });
+    ApiResponse.success(res, category, "Category updated successfully", 200);
+  } catch (error) {
+    ApiResponse.error(res, error.message, 400);
+  }
+};
