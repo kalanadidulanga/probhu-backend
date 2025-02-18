@@ -30,10 +30,10 @@ export const createServiceItem = async (req, res) => {
 export const updateServiceItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const { packageId, name, price } = req.body;
+    const { name, price } = req.body;
     const updatedServiceItem = await prisma.serviceItem.update({
       where: { id: id },
-      data: { packageId, name, price },
+      data: { name, price },
     });
     ApiResponse.success(
       res,
