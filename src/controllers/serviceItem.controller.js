@@ -26,3 +26,32 @@ export const createServiceItem = async (req, res) => {
     ApiResponse.error(res, error.message, 400);
   }
 };
+
+export const updateServiceItem = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { packageId, name, price } = req.body;
+    const updatedServiceItem = await prisma.serviceItem.update({
+      where: { id: id },
+      data: { packageId, name, price },
+    });
+    ApiResponse.success(
+      res,
+      updatedServiceItem,
+      "Service Item updated successfully",
+      200
+    );
+  } catch (error) {
+    ApiResponse.error(res, error.message, 400);
+  }
+};
+
+export const deleteServiceItem = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await prisma.serviceItem.delete({ where: { id: id } });
+    ApiResponse.success(res, null, "Service Item deleted successfully", 204);
+  } catch (error) {
+    ApiResponse.error(res, error.message, 500);
+  }
+};
