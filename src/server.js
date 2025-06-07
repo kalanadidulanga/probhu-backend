@@ -2,6 +2,8 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import servicesRouter from "./routes/services.routes.js";
@@ -9,6 +11,7 @@ import clientsRouter from "./routes/clients.routes.js";
 import reviewsRouter from "./routes/reviews.routes.js";
 import appointmentsRouter from "./routes/appointments.routes.js";
 import contactRouter from "./routes/contact.routes.js";
+import uploadRoutes from "./routes/upload.routes.js";
 // import packagesRouter from './routes/packages.routes.js';
 import package2Router from "./routes/package2.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
@@ -20,10 +23,26 @@ import { errorHandler } from "./middleware/error.middleware.js";
 dotenv.config();
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://prabhu.lk",
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(express.json());
+
+// Serve static files from uploads directory
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 // Routes
 app.get("/", (req, res) => {
@@ -34,6 +53,7 @@ app.get("/api", (req, res) => {
 });
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/upload", uploadRoutes); // File upload route
 app.use("/api/services", servicesRouter);
 app.use("/api/clients", clientsRouter);
 app.use("/api/reviews", reviewsRouter);
